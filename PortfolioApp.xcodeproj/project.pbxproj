@@ -15,6 +15,14 @@
 		4532A3DC2655590500FAD1E0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4532A3DB2655590500FAD1E0 /* HomeView.swift */; };
 		4532A3DF2655592C00FAD1E0 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4532A3DE2655592C00FAD1E0 /* ProjectsView.swift */; };
 		4532A3E32655597F00FAD1E0 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4532A3E12655597F00FAD1E0 /* Main.xcdatamodeld */; };
+		4549A5832656D0BB00CCC62F /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A5822656D0BB00CCC62F /* EditItemView.swift */; };
+		4549A5852656D35500CCC62F /* ItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A5842656D35500CCC62F /* ItemRowView.swift */; };
+		454A4CBC265AA6EE00968AA8 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A4CBB265AA6EE00968AA8 /* EditProjectView.swift */; };
+		454B4000265562080034BD62 /* Item-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454B3FFF265562080034BD62 /* Item-CoreDataHelpers.swift */; };
+		454B4003265562B40034BD62 /* Project-coreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454B4002265562B40034BD62 /* Project-coreDataHelpers.swift */; };
+		4580197426594CB200A917CC /* Binding-OnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580197326594CB200A917CC /* Binding-OnChange.swift */; };
+		458019762659520800A917CC /* ProjectHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458019752659520800A917CC /* ProjectHeader.swift */; };
+		458019782659531C00A917CC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 458019772659531C00A917CC /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +36,14 @@
 		4532A3DB2655590500FAD1E0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4532A3DE2655592C00FAD1E0 /* ProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
 		4532A3E22655597F00FAD1E0 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
+		4549A5822656D0BB00CCC62F /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
+		4549A5842656D35500CCC62F /* ItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRowView.swift; sourceTree = "<group>"; };
+		454A4CBB265AA6EE00968AA8 /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
+		454B3FFF265562080034BD62 /* Item-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		454B4002265562B40034BD62 /* Project-coreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project-coreDataHelpers.swift"; sourceTree = "<group>"; };
+		4580197326594CB200A917CC /* Binding-OnChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding-OnChange.swift"; sourceTree = "<group>"; };
+		458019752659520800A917CC /* ProjectHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHeader.swift; sourceTree = "<group>"; };
+		458019772659531C00A917CC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +78,21 @@
 			children = (
 				4532A3C8265558E200FAD1E0 /* PortfolioAppApp.swift */,
 				4532A3CA265558E200FAD1E0 /* ContentView.swift */,
-				4532A3CC265558E400FAD1E0 /* Assets.xcassets */,
-				4532A3D1265558E400FAD1E0 /* Info.plist */,
-				4532A3CE265558E400FAD1E0 /* Preview Content */,
 				4532A3D8265558F500FAD1E0 /* DataController.swift */,
 				4532A3DB2655590500FAD1E0 /* HomeView.swift */,
 				4532A3DE2655592C00FAD1E0 /* ProjectsView.swift */,
+				454B3FFF265562080034BD62 /* Item-CoreDataHelpers.swift */,
+				454B4002265562B40034BD62 /* Project-coreDataHelpers.swift */,
+				4549A5822656D0BB00CCC62F /* EditItemView.swift */,
+				4549A5842656D35500CCC62F /* ItemRowView.swift */,
+				4580197326594CB200A917CC /* Binding-OnChange.swift */,
+				458019752659520800A917CC /* ProjectHeader.swift */,
 				4532A3E12655597F00FAD1E0 /* Main.xcdatamodeld */,
+				4532A3D1265558E400FAD1E0 /* Info.plist */,
+				4532A3CC265558E400FAD1E0 /* Assets.xcassets */,
+				458019772659531C00A917CC /* Colors.xcassets */,
+				4532A3CE265558E400FAD1E0 /* Preview Content */,
+				454A4CBB265AA6EE00968AA8 /* EditProjectView.swift */,
 			);
 			path = PortfolioApp;
 			sourceTree = "<group>";
@@ -138,6 +162,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				458019782659531C00A917CC /* Colors.xcassets in Resources */,
 				4532A3D0265558E400FAD1E0 /* Preview Assets.xcassets in Resources */,
 				4532A3CD265558E400FAD1E0 /* Assets.xcassets in Resources */,
 			);
@@ -152,10 +177,17 @@
 			files = (
 				4532A3E32655597F00FAD1E0 /* Main.xcdatamodeld in Sources */,
 				4532A3DF2655592C00FAD1E0 /* ProjectsView.swift in Sources */,
+				454B4003265562B40034BD62 /* Project-coreDataHelpers.swift in Sources */,
 				4532A3CB265558E200FAD1E0 /* ContentView.swift in Sources */,
+				454A4CBC265AA6EE00968AA8 /* EditProjectView.swift in Sources */,
+				4549A5852656D35500CCC62F /* ItemRowView.swift in Sources */,
 				4532A3DC2655590500FAD1E0 /* HomeView.swift in Sources */,
+				458019762659520800A917CC /* ProjectHeader.swift in Sources */,
+				4580197426594CB200A917CC /* Binding-OnChange.swift in Sources */,
 				4532A3D9265558F500FAD1E0 /* DataController.swift in Sources */,
 				4532A3C9265558E200FAD1E0 /* PortfolioAppApp.swift in Sources */,
+				454B4000265562080034BD62 /* Item-CoreDataHelpers.swift in Sources */,
+				4549A5832656D0BB00CCC62F /* EditItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
