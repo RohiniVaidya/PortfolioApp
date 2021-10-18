@@ -60,15 +60,20 @@ class DataController: ObservableObject {
     }
     
     func save() {
-        let context = container.viewContext
-        if context.hasChanges {
-            try? context.save()
+//        let context = container.viewContext
+        if container.viewContext.hasChanges {
+            do {
+                try container.viewContext.save()
+            }
+            catch {
+                print("Error in saving \(error.localizedDescription)")
+            }
         }
     }
     
     func delete(_ object: NSManagedObject) {
-        let context = container.viewContext
-        context.delete(object)
+//        let context = container.viewContext
+        container.viewContext.delete(object)
     }
     
     func deleteAll() {
@@ -81,6 +86,28 @@ class DataController: ObservableObject {
         let deleteBatchRequest2 = NSBatchDeleteRequest(fetchRequest: fetchReq2)
         let _ = try? container.viewContext.execute(deleteBatchRequest2)
         
+    }
+    
+    func count<T>(fetchrequest: NSFetchRequest<T>) -> Int {
+        
+        return (try? container.viewContext.count(for: fetchrequest)) ?? 0
+    }
+    
+    func hasEarnedAward(_ award: Award) -> Bool {
+        switch award.criterion {
+        case "items":
+            let fetchRequest: NSFetchRequest<Item> = NSFetchRequest(entityName: "Item")
+            let count = count(fetchrequest: fetchRequest)
+            return count >= award.value
+        case "complete":
+            let fetchRequest: NSFetchRequest<Item> = NSFetchRequest(entityName: "Item")
+            let predicate = NSPredicate(format: "completed == true")
+            fetchRequest.predicate = predicate
+            let count = count(fetchrequest: fetchRequest)
+            return count >= award.value
+        default:
+            return false
+        }
     }
 }
 

@@ -15,6 +15,7 @@ extension Binding {
             self.wrappedValue
         } set: { newValue in
             self.wrappedValue = newValue
+            print("New Val = \(newValue)")
             handler()
         }
     }

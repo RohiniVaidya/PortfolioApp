@@ -6,7 +6,7 @@
 //
 
 import CoreData
-
+import SwiftUI
 extension Project {
     
     static let colors = ["Pink", "Purple", "Red", "Orange", "Gold", "Green", "Teal", "Light Blue", "Dark Blue", "Midnight", "Dark Gray", "Gray"]
@@ -24,10 +24,11 @@ extension Project {
     }
     
     var projectItems: [Item] {
-        let itemsArray = items?.allObjects as? [Item] ?? []
-        
-        
-        return itemsArray.sorted { first, second in
+        items?.allObjects as? [Item] ?? []
+    }
+    
+    var projectItemsDefaultSorted: [Item] {
+        projectItems.sorted { first, second in
             if first.completed == false {
                 if second.completed == true {return true}
             }
@@ -42,6 +43,10 @@ extension Project {
             }
             return first.itemCreationDate < second.itemCreationDate
         }
+    }
+    
+    var label: LocalizedStringKey {
+        return "\(projectTitle), \(projectItems.count) items, \(completionAmount * 100, specifier: "%g")% complete."
     }
     
  
@@ -63,4 +68,16 @@ extension Project {
         project.closed = true
         return project
     }
+    
+    func projectItems(using sortOrder: Item.SortOrder) -> [Item] {
+        switch sortOrder {
+        case .optimized:
+            return projectItemsDefaultSorted
+        case .creationDate:
+            return projectItems.sorted(by: \Item.itemCreationDate)
+        case .title:
+            return projectItems.sorted(by: \Item.itemTitle)
+        }
+    }
+
 }

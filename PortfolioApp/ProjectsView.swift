@@ -13,9 +13,13 @@ struct ProjectsView: View {
     let projects: FetchRequest<Project>
     static let openTag: String? = "Open"
     static let closedTag: String? = "Closed"
-
+    
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
+    
+    
+    @State private var showingActionSheet = false
+    @State private var sortOrder = Item.SortOrder.optimized
     
     init(showClosedProject: Bool) {
         //since we cannot use @FetchRequest as we do not know if it has to be open or closed project. Hence we are not using the propertyWrapper of FetchRequest but we are using the underlying struct and create it by hand and use that to show the results.
@@ -27,57 +31,84 @@ struct ProjectsView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(projects.wrappedValue) { project in
-                    Section(header: ProjectHeader(project: project)) {
-                        //In coredata often when we add relationships, we get the items as Set & not an array, hence we are getting allObjects = array
+            Group {
+                if projects.wrappedValue.isEmpty {
+                    Text("No projects yet!")
+                        .foregroundColor(.secondary)
+                }
+                else {
+                    List {
+                        ForEach(projects.wrappedValue) { project in
+                            Section(header: ProjectHeader(project: project)) {
+                                //In coredata often when we add relationships, we get the items as Set & not an array, hence we are getting allObjects = array
+                                
+                                ForEach(project.projectItems(using: sortOrder)) { item in
+                                    ItemRowView(project: project, item: item)
+                                }
+                                .onDelete { offsets in
+                                    let allItems = project.projectItems(using: sortOrder)
 
-                        ForEach(project.projectItems) { item in
-                           ItemRowView(item: item)
-                        }
-                        .onDelete { offsets in
-                            let allItems = project.projectItems
+                                    for offset in offsets {
+                                        let item = allItems[offset]
+                                        dataController.delete(item)
+                                    }
 
-                            for offset in offsets {
-                                let item = allItems[offset]
-                                dataController.delete(item)
-                            }
-
-                            dataController.save()
-                        }
-                        if showClosedProjects == false {
-                            Button {
-                                withAnimation {
-                                    let item = Item(context: managedObjectContext)
-                                    item.project = project
-                                    item.creationDate = Date()
                                     dataController.save()
                                 }
-                            } label: {
-                                Label("Add New Item", systemImage: "plus")
+                                if showClosedProject == false {
+                                    Button {
+                                        withAnimation {
+                                            let item = Item(context: managedObjectContext)
+                                            item.project = project
+                                            item.creationDate = Date()
+                                            dataController.save()
+                                        }
+                                    } label: {
+                                        Label("Add New Item", systemImage: "plus")
+                                    }
+                                }
                             }
                         }
                     }
+                    .listStyle(InsetGroupedListStyle())
                 }
+                
             }
-            .listStyle(InsetGroupedListStyle())
             .navigationTitle(Text(showClosedProject ? "Closed Projects" : "Open Projects"))
             .toolbar {
-                if !showClosedProject {
-                    Button(action: {
-                        
-                        withAnimation {
-                            let project = Project(context: managedObjectContext)
-                            project.creationDate = Date()
-                            project.closed = false
-                            dataController.save()
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if !showClosedProject {
+                        Button(action: {
+                            
+                            withAnimation {
+                                let project = Project(context: managedObjectContext)
+                                project.creationDate = Date()
+                                project.closed = false
+                                dataController.save()
+                            }
+                            
+                        }){
+                            Label("Add Project", systemImage: "plus")
                         }
-                        
-                    }){
-                        Label("Add Project", systemImage: "plus")
                     }
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showingActionSheet = true
+                    } label: {
+                        Label("Sort", systemImage: "arrow.up.arrow.down")
+                    }
+                }
+                
             }
+            .actionSheet(isPresented: $showingActionSheet) {
+                ActionSheet(title: Text("Sort Items"), message: Text(""), buttons: [
+                    .default(Text("Optimized"), action: { sortOrder = .optimized }),
+                    .default(Text("Title"), action: {sortOrder = .title }),
+                    .default(Text("Creation Date"), action: {sortOrder = .creationDate})
+                ])
+            }
+            SelectSomethingView()
         }
     }
 }
